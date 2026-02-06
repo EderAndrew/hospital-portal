@@ -6,6 +6,9 @@ import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useCallback } from 'react';
 import { useRouter } from 'expo-router';
+import { ButtonComponent } from '@/components/ButtonComponent';
+import { AuthSignin } from '@/components/auth/AuthSignin';
+import { AuthFooter } from '@/components/auth/AuthFooter';
 
 export default function Login() {
     const router = useRouter();
@@ -38,26 +41,19 @@ export default function Login() {
                     placeholder='Digite sua Senha'
                 />
                 <Text className='w-full text-right text-blue-500'>Esqueceu a senha?</Text>
-                <TouchableOpacity className='flex flex-row justify-center items-center w-96 px-8 py-3 bg-blue-500 rounded-lg mt-8'>
-                <Text className='text-white text-center text-lg font-semibold'>Entrar</Text>
-                <Icon name="LogIn" size={20} color="white" style={{marginLeft: 8}}/>
-                </TouchableOpacity>
+                <ButtonComponent isIcon={true} icon="LogIn" title="Entrar"/>
                 <View className='w-full flex items-center mt-4 flex-row justify-center gap-4'>
                 <View className='w-1/3 h-0.5 bg-gray-300'></View>
                 <Text className='text-gray-500 text-lg'>ou</Text>
                 <View className='w-1/3 h-0.5 bg-gray-300'></View>
                 </View>
             </View>
-            <View className='flex flex-row items-center gap-2 mt-4'>
-                <Text>Não tem uma conta?</Text>
-                <TouchableOpacity onPress={handleForgotPassword}>
-                <Text className='text-blue-500'>Registrar-se</Text>
-                </TouchableOpacity>
-            </View>
-            <View className='mt-4 flex flex-row items-center gap-2'>
-                <Icon name="Shield" size={20} color="#d1d5db" />
-                <Text className='text-gray-400 text-sm'>SECURE SSL ENCRYPTION</Text>
-            </View>
+            <AuthSignin 
+                handlerScreen={handleForgotPassword}
+                label="Não tem uma conta?"
+                labelScreen="Registrar-se"
+            />
+            <AuthFooter />
             <StatusBar style="auto" />
         </SafeAreaView>
     );
