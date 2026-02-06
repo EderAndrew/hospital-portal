@@ -24,20 +24,20 @@ export default function Login() {
                 <Text className='text-3xl font-bold'>👋 Bem vindo(a)!</Text>
                 <Text className='text-lg text-blue-500'>Faça Login para agendar seus exames médicos</Text>
             </View>
-            <View className='flex items-center w-full mt-4'>
+            <View className='flex items-center w-full mt-4 px-8'>
                 <InputComponent 
                     type="email-address"
                     label="Email"
-                    icon="Mail"
                     placeholder='Digite o seu Email'
                 />
                 <InputComponent
                     type="password"
                     label="Senha"
-                    icon="Lock"
+                    icon="EyeOff"
+                    isIcon={true}
                     placeholder='Digite sua Senha'
                 />
-                <Text className='w-full text-right text-blue-500 px-8'>Esqueceu a senha?</Text>
+                <Text className='w-full text-right text-blue-500'>Esqueceu a senha?</Text>
                 <TouchableOpacity className='flex flex-row justify-center items-center w-96 px-8 py-3 bg-blue-500 rounded-lg mt-8'>
                 <Text className='text-white text-center text-lg font-semibold'>Entrar</Text>
                 <Icon name="LogIn" size={20} color="white" style={{marginLeft: 8}}/>
