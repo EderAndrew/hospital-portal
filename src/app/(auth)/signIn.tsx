@@ -5,9 +5,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { InputComponent } from '@/components/InputComponent';
 import { ButtonComponent } from '@/components/ButtonComponent';
 import { AuthSignin } from '@/components/auth/AuthSignin';
-import { AuthFooter } from '@/components/auth/AuthFooter';
 import { AuthHeader } from '@/components/auth/AuthHeader';
 import { useDefaultRoute } from '@/hooks/useRoute';
+import { AuthFooter } from '@/components/auth/footer/AuthFooter';
 
 export default function SignIn() {
     const { back } = useDefaultRoute();

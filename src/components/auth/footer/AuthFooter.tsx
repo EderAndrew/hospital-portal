@@ -1,5 +1,6 @@
+import { Icon } from "@/components/IconComponent"
 import { View, Text } from "react-native"
-import { Icon } from "../IconComponent"
+
 
 export const AuthFooter = () => {
     return (

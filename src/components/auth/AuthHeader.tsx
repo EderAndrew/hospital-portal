@@ -1,15 +1,16 @@
 import { TouchableOpacity, View, Text } from "react-native"
-import { Icon } from "../IconComponent"
+import { Icon } from "@/components/IconComponent"
 import { useDefaultRoute } from "@/hooks/useRoute";
 
 type Props = {
     label: string;
 }
+
 export const AuthHeader = ({label}:Props) => {
     const { back } = useDefaultRoute();
 
     return (
-        <View className='flex flex-row justify-between'>
+        <View className='flex w-full flex-row justify-between'>
             <TouchableOpacity 
                 onPress={() => back()}
                 className='flex flex-row items-center gap-2'>

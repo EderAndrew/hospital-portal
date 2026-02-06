@@ -5,8 +5,9 @@ import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ButtonComponent } from '@/components/ButtonComponent';
 import { AuthSignin } from '@/components/auth/AuthSignin';
-import { AuthFooter } from '@/components/auth/AuthFooter';
 import { useDefaultRoute } from '@/hooks/useRoute';
+import { AuthFooter } from '@/components/auth/footer/AuthFooter';
+import { LineFooter } from '@/components/auth/footer/LineFooter';
 
 export default function Login() {
     const { push } = useDefaultRoute();
@@ -40,11 +41,7 @@ export default function Login() {
                     </TouchableOpacity>
                 </View>
                 <ButtonComponent isIcon={true} icon="LogIn" title="Entrar"/>
-                <View className='w-full flex items-center mt-4 flex-row justify-center gap-4'>
-                <View className='w-1/3 h-0.5 bg-gray-300'></View>
-                <Text className='text-gray-500 text-lg'>ou</Text>
-                <View className='w-1/3 h-0.5 bg-gray-300'></View>
-                </View>
+                <LineFooter />
             </View>
             <AuthSignin 
                 handlerScreen={() => push('/signIn')}
