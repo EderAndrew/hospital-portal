@@ -10,7 +10,7 @@ type Props = {
 export const ButtonComponent = ({title, isIcon = false, icon}: Props) => {
     return (
         <TouchableOpacity 
-            className='flex flex-row justify-center items-center w-96 px-8 py-3 bg-blue-500 rounded-lg mt-8'
+            className='flex flex-row justify-center items-center w-full py-3 bg-blue-500 rounded-lg mt-8'
             onPress={()=>{}}
         >
             <Text className='text-white text-center text-lg font-semibold'>{title}</Text>

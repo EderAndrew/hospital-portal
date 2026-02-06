@@ -1,21 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { Hospital } from 'lucide-react-native';
-import { Icon } from '../../components/IconComponent';
 import { InputComponent } from '../../components/InputComponent';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useCallback } from 'react';
-import { useRouter } from 'expo-router';
 import { ButtonComponent } from '@/components/ButtonComponent';
 import { AuthSignin } from '@/components/auth/AuthSignin';
 import { AuthFooter } from '@/components/auth/AuthFooter';
+import { useDefaultRoute } from '@/hooks/useRoute';
 
 export default function Login() {
-    const router = useRouter();
-
-    const handleForgotPassword = useCallback(() => {
-        router.push('/(auth)/signIn')
-    }, [router])
+    const { push } = useDefaultRoute();
     
     return (
         <SafeAreaView className='bg-white flex-1 flex items-center justify-between'>
@@ -40,7 +34,11 @@ export default function Login() {
                     isIcon={true}
                     placeholder='Digite sua Senha'
                 />
-                <Text className='w-full text-right text-blue-500'>Esqueceu a senha?</Text>
+                <View className='w-full flex items-end'>
+                    <TouchableOpacity onPress={() => push('/forgetPassword')}>
+                        <Text className='text-blue-500'>Esqueci a senha?</Text>
+                    </TouchableOpacity>
+                </View>
                 <ButtonComponent isIcon={true} icon="LogIn" title="Entrar"/>
                 <View className='w-full flex items-center mt-4 flex-row justify-center gap-4'>
                 <View className='w-1/3 h-0.5 bg-gray-300'></View>
@@ -49,7 +47,7 @@ export default function Login() {
                 </View>
             </View>
             <AuthSignin 
-                handlerScreen={handleForgotPassword}
+                handlerScreen={() => push('/signIn')}
                 label="Não tem uma conta?"
                 labelScreen="Registrar-se"
             />

@@ -1,29 +1,21 @@
 
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Icon } from "@/components/IconComponent";
 import { InputComponent } from '@/components/InputComponent';
-import { useRouter } from 'expo-router/build/exports';
 import { ButtonComponent } from '@/components/ButtonComponent';
 import { AuthSignin } from '@/components/auth/AuthSignin';
 import { AuthFooter } from '@/components/auth/AuthFooter';
+import { AuthHeader } from '@/components/auth/AuthHeader';
+import { useDefaultRoute } from '@/hooks/useRoute';
 
 export default function SignIn() {
-    const router = useRouter();
+    const { back } = useDefaultRoute();
 
     return (
         <SafeAreaView className='flex-1 px-4 bg-white items-center'>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View className='flex flex-row justify-between'>
-                    <TouchableOpacity 
-                        onPress={() => router.back()}
-                        className='flex flex-row items-center gap-2'>
-                            <Icon name="ChevronLeft" size={24} color="black" />
-                    </TouchableOpacity>
-                    <Text className='text-xl'>Criar Conta</Text>
-                    <View className='w-6 h-6'></View>
-                </View>
+                <AuthHeader label='Criar Conta'/>
                 <View className='mt-12 flex-1 items-center'>
                     <Text className='text-4xl'>Crie a sua Conta no Hospital Portal</Text>
                     <Text className='mt-4 mb-6 text-slate-600'>Gerencie seus exames médicos e agendamentos em um único lugar com total segurança.</Text>
@@ -51,7 +43,7 @@ export default function SignIn() {
                     />
                     <ButtonComponent title='Criar Conta' icon='UserRoundCheck' isIcon={true}/>
                     <AuthSignin 
-                        handlerScreen={() => router.back()}
+                        handlerScreen={() => back()}
                         label="Já tem uma conta?"
                         labelScreen="Entrar"
                     />
