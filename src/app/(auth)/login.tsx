@@ -1,0 +1,64 @@
+import { StatusBar } from 'expo-status-bar';
+import { Hospital } from 'lucide-react-native';
+import { Icon } from '../../components/IconComponent';
+import { InputComponent } from '../../components/InputComponent';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useCallback } from 'react';
+import { useRouter } from 'expo-router';
+
+export default function Login() {
+    const router = useRouter();
+
+    const handleForgotPassword = useCallback(() => {
+        router.push('/(auth)/signIn')
+    }, [router])
+    
+    return (
+        <SafeAreaView className='bg-white flex-1 flex items-center justify-between'>
+            <Text className={`text-xl font-semibold mb-6 ${Platform.OS === 'ios' ? '': ''}`}>Hospital portal</Text>
+            <View className='flex items-center gap-2'>
+                <View className='w-28 h-28 bg-blue-200 rounded-xl flex justify-center items-center mb-6'>
+                <Hospital color="#3b82f6" size={64} className='bg-blue-300'/>
+                </View>
+                <Text className='text-3xl font-bold'>👋 Bem vindo(a)!</Text>
+                <Text className='text-lg text-blue-500'>Faça Login para agendar seus exames médicos</Text>
+            </View>
+            <View className='flex items-center w-full mt-4'>
+                <InputComponent 
+                    type="email-address"
+                    label="Email"
+                    icon="Mail"
+                    placeholder='Digite o seu Email'
+                />
+                <InputComponent
+                    type="password"
+                    label="Senha"
+                    icon="Lock"
+                    placeholder='Digite sua Senha'
+                />
+                <Text className='w-full text-right text-blue-500 px-8'>Esqueceu a senha?</Text>
+                <TouchableOpacity className='flex flex-row justify-center items-center w-96 px-8 py-3 bg-blue-500 rounded-lg mt-8'>
+                <Text className='text-white text-center text-lg font-semibold'>Entrar</Text>
+                <Icon name="LogIn" size={20} color="white" style={{marginLeft: 8}}/>
+                </TouchableOpacity>
+                <View className='w-full flex items-center mt-4 flex-row justify-center gap-4'>
+                <View className='w-1/3 h-0.5 bg-gray-300'></View>
+                <Text className='text-gray-500 text-lg'>ou</Text>
+                <View className='w-1/3 h-0.5 bg-gray-300'></View>
+                </View>
+            </View>
+            <View className='flex flex-row items-center gap-2 mt-4'>
+                <Text>Não tem uma conta?</Text>
+                <TouchableOpacity onPress={handleForgotPassword}>
+                <Text className='text-blue-500'>Registrar-se</Text>
+                </TouchableOpacity>
+            </View>
+            <View className='mt-4 flex flex-row items-center gap-2'>
+                <Icon name="Shield" size={20} color="#d1d5db" />
+                <Text className='text-gray-400 text-sm'>SECURE SSL ENCRYPTION</Text>
+            </View>
+            <StatusBar style="auto" />
+        </SafeAreaView>
+    );
+}
