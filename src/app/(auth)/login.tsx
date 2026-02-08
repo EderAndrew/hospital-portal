@@ -8,9 +8,34 @@ import { AuthSignin } from '@/components/auth/AuthSignin';
 import { useDefaultRoute } from '@/hooks/useRoute';
 import { AuthFooter } from '@/components/auth/footer/AuthFooter';
 import { LineFooter } from '@/components/auth/footer/LineFooter';
+import { LoginSchema } from '@/schemas/login.schema';
+import { useCallback, useState } from 'react';
 
 export default function Login() {
     const { push } = useDefaultRoute();
+    const [form, setForm] = useState<LoginSchema>({
+        email: "",
+        password: ""
+    })
+    const [message, setMessage] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [errors, setErrors] = useState<{
+        email?: string;
+        password?: string;
+        general?: string;
+    }>({});
+
+    const handleInputChange = useCallback((field: keyof LoginSchema, value: string) => {
+        setForm(prev => ({ ...prev, [field]: value }));
+        // Clear field error when user starts typing
+        if (errors[field]) {
+        setErrors(prev => ({ ...prev, [field]: undefined }));
+        }
+        // Clear general message when user types
+        if (message) {
+        setMessage("");
+        }
+    }, [errors, message]);
     
     return (
         <SafeAreaView className='bg-white flex-1 flex items-center justify-between'>
@@ -27,6 +52,8 @@ export default function Login() {
                     type="email-address"
                     label="Email"
                     placeholder='Digite o seu Email'
+                    value={form.email}
+                    onChangeText={(text) => handleInputChange('email', text)}
                 />
                 <InputComponent
                     type="password"
@@ -34,6 +61,8 @@ export default function Login() {
                     icon="EyeOff"
                     isIcon={true}
                     placeholder='Digite sua Senha'
+                    value={form.password}
+                    onChangeText={(text) => handleInputChange('password', text)}
                 />
                 <View className='w-full flex items-end'>
                     <TouchableOpacity onPress={() => push('/forgetPassword')}>

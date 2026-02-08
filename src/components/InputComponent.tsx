@@ -7,9 +7,19 @@ type Props = {
     icon?: keyof typeof import('lucide-react-native/icons');
     placeholder: string;
     isIcon?: boolean;
+    value: string;
+    onChangeText: (text: string) => void
 }
 
-export const InputComponent = ({type, label, icon, placeholder, isIcon = false}: Props) => {
+export const InputComponent = ({
+    type, 
+    label, 
+    icon, 
+    placeholder, 
+    isIcon = false,
+    value,
+    onChangeText
+}: Props) => {
     return (
         <View className='w-full flex gap-2'>
             <Text className='text-lg'>{label}</Text>
@@ -20,6 +30,8 @@ export const InputComponent = ({type, label, icon, placeholder, isIcon = false}:
                 className='flex-1'
                 keyboardType={type === "email-address" ? "email-address" : "default"}
                 secureTextEntry={type === "password"}
+                value={value}
+                onChangeText={onChangeText}
             />
             {isIcon && icon && <Icon name={icon} size={20} color="#9ca3af" />}
             </View>
