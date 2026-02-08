@@ -3,14 +3,21 @@ import { api } from "./api.service";
 import { TokenService } from "./token.service";
 
 export const signIn = async (payload: LoginSchema) => {
-  const { data } = await api.post("/auth/login", payload, {
-    headers: {
-      "x-platform": "mobile",
-    },
-  });
-  TokenService.setAccessToken(data.accessToken);
-  await TokenService.setRefreshToken(data.refreshToken);
+  try {
+    const { data } = await api.post("/auth/login", payload, {
+      headers: {
+        "x-platform": "mobile",
+      },
+    });
+    console.log("DATA: ", data);
+    TokenService.setAccessToken(data.accessToken);
+    await TokenService.setRefreshToken(data.refreshToken);
 
-  const me = await api.get("/users/me");
-  return me.data;
+    const me = await api.get("/users/me");
+    return me.data;
+  } catch (error: any) {
+    console.log(error.response?.data);
+
+    throw new Error(error.response?.data?.message || "Erro ao autenticar");
+  }
 };

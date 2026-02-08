@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { Hospital } from "lucide-react-native";
 import { InputComponent } from "../../components/InputComponent";
-import { Platform, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Platform, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ButtonComponent } from "@/components/ButtonComponent";
 import { AuthSignin } from "@/components/auth/AuthSignin";
@@ -29,9 +29,12 @@ export default function Login() {
   });
 
   const onSubmit = async (data: LoginSchema) => {
-    const user = await signIn(data);
-
-    //console.log(user);
+    try {
+      const user = await signIn(data);
+      console.log(user);
+    } catch (error: any) {
+      Alert.alert("Erro", error.message);
+    }
   };
 
   return (
