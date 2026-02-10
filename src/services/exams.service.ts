@@ -13,3 +13,15 @@ export const findExams = async () => {
     );
   }
 };
+
+export const findExamsById = async (id: string) => {
+  try {
+    const { data } = await api.get(`exams/exam/${id}`);
+
+    return data;
+  } catch (error: any) {
+    console.log(error.response?.data);
+
+    throw new Error(error.response?.data?.message || "Erro ao buscar o exame");
+  }
+};

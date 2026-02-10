@@ -3,7 +3,7 @@ import { Tabs } from "expo-router";
 
 export default function DashboardLayout() {
   return (
-    <Tabs>
+    <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
         name="home"
         options={{
@@ -13,7 +13,7 @@ export default function DashboardLayout() {
         }}
       />
       <Tabs.Screen
-        name="exams"
+        name="(exams)"
         options={{
           title: "Exames Disponíveis",
           tabBarLabel: iconlabels.exams,
@@ -21,7 +21,7 @@ export default function DashboardLayout() {
         }}
       />
       <Tabs.Screen
-        name="schedule"
+        name="(schedules)"
         options={{
           title: iconlabels.schedule,
           tabBarLabel: iconlabels.schedule,

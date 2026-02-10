@@ -2,6 +2,7 @@ import * as icons from "lucide-react-native/icons";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Icon } from "../IconComponent";
 import { Exam } from "@/types/exam.type";
+import { useDefaultRoute } from "@/hooks/useRoute";
 
 type Props = {
   exam: Exam;
@@ -14,6 +15,7 @@ type IconProps = {
 };
 
 export const CardExam = ({ exam }: Props) => {
+  const { push } = useDefaultRoute();
   const specialtyIconMap: Record<string, IconProps> = {
     Hematologia: {
       name: "Droplet",
@@ -41,7 +43,10 @@ export const CardExam = ({ exam }: Props) => {
   const { name: iconName, color, bgColor } = specialty;
 
   return (
-    <View className="w-full flex flex-row justify-between items-center bg-white mb-2 p-3 rounded-lg">
+    <TouchableOpacity
+      onPress={() => push(`/createAppointment/${exam.id}`)}
+      className="w-full flex flex-row justify-between items-center bg-white mb-2 p-3 rounded-lg"
+    >
       <View className="flex flex-row gap-2">
         <View
           className="p-4 rounded-xl h-18 w-18 flex justify-center items-center"
@@ -54,9 +59,9 @@ export const CardExam = ({ exam }: Props) => {
           <Text className="text-slate-500">{exam.specialty}</Text>
         </View>
       </View>
-      <TouchableOpacity>
+      <View>
         <Icon name="ChevronRight" color={"#64748b"} size={22} />
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 };

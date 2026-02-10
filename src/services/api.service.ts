@@ -5,6 +5,10 @@ export const api = axios.create({
   baseURL: process.env.EXPO_PUBLIC_KGROK_URL,
 });
 
+export const refreshApi = axios.create({
+  baseURL: process.env.EXPO_PUBLIC_KGROK_URL,
+});
+
 api.interceptors.request.use(async (config) => {
   const token = TokenService.getAccessToken();
   if (token) {
@@ -53,7 +57,14 @@ api.interceptors.response.use(
       try {
         const refreshToken = await TokenService.getRefreshToken();
 
-        const { data } = await api.post("/auth/refresh", { refreshToken });
+        if (!refreshToken) {
+          await TokenService.clear();
+          throw new Error("Refresh token ausente");
+        }
+
+        const { data } = await refreshApi.post("/auth/refresh", {
+          refreshToken,
+        });
 
         TokenService.setAccessToken(data.accessToken);
         await TokenService.setRefreshToken(data.refreshToken);
