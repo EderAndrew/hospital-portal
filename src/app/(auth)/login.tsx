@@ -30,10 +30,13 @@ export default function Login() {
 
   const onSubmit = async (data: LoginSchema) => {
     try {
-      const user = await signIn(data);
-      console.log(user);
+      setLoading(true);
+      await signIn(data);
+      replace("(dashboard)/home");
     } catch (error: any) {
-      Alert.alert("Erro", error.message);
+      Alert.alert("Login", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,7 +74,9 @@ export default function Login() {
           )}
           name="email"
         />
-        {errors.email && <Text>Campo Email é obrigatório.</Text>}
+        {errors.email && (
+          <Text className="text-red-500">Campo Email é obrigatório.</Text>
+        )}
 
         <Controller
           control={control}
@@ -90,7 +95,9 @@ export default function Login() {
           )}
           name="password"
         />
-
+        {errors.password && (
+          <Text className="text-red-500">Campo Senha é obrigatório.</Text>
+        )}
         <View className="w-full flex items-end">
           <TouchableOpacity onPress={() => push("/forgetPassword")}>
             <Text className="text-blue-500">Esqueci a senha?</Text>
@@ -99,7 +106,7 @@ export default function Login() {
         <ButtonComponent
           isIcon={true}
           icon="LogIn"
-          title="Entrar"
+          title={!isloading ? "Entrar" : "Entrando..."}
           onPress={handleSubmit(onSubmit)}
         />
         <LineFooter />
