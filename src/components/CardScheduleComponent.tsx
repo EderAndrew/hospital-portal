@@ -9,7 +9,7 @@ type Props = {
 export const CardScheduleComponent = ({ schedule }: Props) => {
   const dateCorrect = new Date(schedule.date).toLocaleString().split(",")[0];
   return (
-    <View className="w-full bg-white p-2 rounded-lg">
+    <View className="w-full bg-white p-2 rounded-lg mb-4">
       <Text className="font-semibold text-blue-500">
         {schedule.exam.name.toUpperCase()}
       </Text>
