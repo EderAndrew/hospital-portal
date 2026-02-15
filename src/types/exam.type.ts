@@ -1,10 +1,16 @@
-export type Exam = {
-  id?: string;
+export type Specialties = {
+  id: string;
   name: string;
-  specialty: string;
+  exams: Exam[];
+};
+
+export type Exam = {
+  id: string;
+  name: string;
   description: string;
   preparetion: string;
   duration: string;
-  createdAt?: string;
-  updatedAt?: string;
+  specialty: {
+    id: string;
+  };
 };

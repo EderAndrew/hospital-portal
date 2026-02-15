@@ -2,7 +2,7 @@ import { api } from "./api.service";
 
 export const findExams = async () => {
   try {
-    const { data } = await api.get("/exams/findExams");
+    const { data } = await api.get("/specialties/allSpecialties");
 
     return data;
   } catch (error: any) {

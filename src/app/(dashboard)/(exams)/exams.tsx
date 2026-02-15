@@ -10,17 +10,19 @@ import { SearchExamComponent } from "@/components/exams/SearchExamComponent";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { findExams } from "@/services/exams.service";
-import { Exam } from "@/types/exam.type";
+import { Specialties } from "@/types/exam.type";
 import { CardExam } from "@/components/exams/CardExam";
 import { ExamEspecialty } from "@/constants/examEspecialty";
 import { Header } from "@/components/Header";
 
 export default function Exams() {
-  const [exams, setExams] = useState<Exam[]>([]);
+  const [exams, setExams] = useState<Specialties[]>([]);
+  const [isSelected, setIsSelected] = useState<string>("");
 
   useEffect(() => {
     (async () => {
       const resp = await findExams();
+      setIsSelected(resp[0].id);
       setExams(resp);
     })();
   }, []);
@@ -32,15 +34,16 @@ export default function Exams() {
         <SearchExamComponent />
         <View className="w-full my-4">
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {ExamEspecialty.map((esp) => (
+            {exams.map((esp) => (
               <TouchableOpacity
                 key={esp.id}
-                className={`${esp.isSelected ? "bg-blue-500" : "bg-white"} px-4 py-2 rounded-full mr-4`}
+                className={`${esp.id === isSelected ? "bg-blue-500" : "bg-white"} px-4 py-2 rounded-full mr-4`}
+                onPress={() => setIsSelected(esp.id)}
               >
                 <Text
-                  className={`${esp.isSelected ? "text-white" : "text-black"}  text-lg`}
+                  className={`${esp.id === isSelected ? "text-white" : "text-black"}  text-lg`}
                 >
-                  {esp.title}
+                  {esp.name}
                 </Text>
               </TouchableOpacity>
             ))}
@@ -48,15 +51,15 @@ export default function Exams() {
         </View>
 
         <View className="w-full mb-2">
-          <Text className="text-lg text-slate-500 font-semibold">
-            Exames populares
-          </Text>
+          <Text className="text-lg text-slate-500 font-semibold">Exames</Text>
         </View>
         <FlatList
           data={exams}
           keyExtractor={(item) => item.id as string}
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => <CardExam exam={item} />}
+          renderItem={({ item }) => (
+            <CardExam isSelected={isSelected} exam={item.exams} />
+          )}
         />
       </View>
 
