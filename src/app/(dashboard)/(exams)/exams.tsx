@@ -8,16 +8,23 @@ import {
 } from "react-native";
 import { SearchExamComponent } from "@/components/exams/SearchExamComponent";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { findExams } from "@/services/exams.service";
 import { Specialties } from "@/types/exam.type";
 import { CardExam } from "@/components/exams/CardExam";
-import { ExamEspecialty } from "@/constants/examEspecialty";
 import { Header } from "@/components/Header";
 
 export default function Exams() {
   const [exams, setExams] = useState<Specialties[]>([]);
   const [isSelected, setIsSelected] = useState<string>("");
+
+  const filteredExams = useMemo(
+    () =>
+      exams
+        .flatMap((s) => s.exams)
+        .filter((ex) => ex.specialty.id === isSelected),
+    [exams, isSelected],
+  );
 
   useEffect(() => {
     (async () => {
@@ -54,12 +61,10 @@ export default function Exams() {
           <Text className="text-lg text-slate-500 font-semibold">Exames</Text>
         </View>
         <FlatList
-          data={exams}
+          data={filteredExams}
           keyExtractor={(item) => item.id as string}
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <CardExam isSelected={isSelected} exam={item.exams} />
-          )}
+          renderItem={({ item }) => <CardExam exam={item} />}
         />
       </View>
 
