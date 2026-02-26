@@ -4,12 +4,14 @@ import { InputComponent } from "../../components/InputComponent";
 import { Alert, Platform, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ButtonComponent } from "@/components/ButtonComponent";
-import { AuthSignin } from "@/components/auth/AuthSignin";
 import { useDefaultRoute } from "@/hooks/useRoute";
 import { AuthFooter } from "@/components/auth/footer/AuthFooter";
-import { LineFooter } from "@/components/auth/footer/LineFooter";
 import { LoginSchema } from "@/schemas/login.schema";
-import { useForm, Controller } from "react-hook-form";
+import {
+  useForm,
+  Controller,
+  type ControllerRenderProps,
+} from "react-hook-form";
 import { signIn } from "@/services/auth.service";
 import { useState } from "react";
 
@@ -21,7 +23,7 @@ export default function Login() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<LoginSchema>({
     defaultValues: {
       email: "",
       password: "",
@@ -62,14 +64,18 @@ export default function Login() {
           rules={{
             required: true,
           }}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({
+            field,
+          }: {
+            field: ControllerRenderProps<LoginSchema, "email">;
+          }) => (
             <InputComponent
               type="email-address"
               label="Email"
-              onBlur={onBlur}
+              onBlur={field.onBlur}
               placeholder="Digite o seu Email"
-              onChangeText={onChange}
-              value={value}
+              onChangeText={field.onChange}
+              value={field.value}
             />
           )}
           name="email"
@@ -81,16 +87,20 @@ export default function Login() {
         <Controller
           control={control}
           rules={{ required: true }}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({
+            field,
+          }: {
+            field: ControllerRenderProps<LoginSchema, "password">;
+          }) => (
             <InputComponent
               type="password"
               label="Senha"
               icon="EyeOff"
               isIcon={true}
-              onBlur={onBlur}
+              onBlur={field.onBlur}
               placeholder="Digite sua Senha"
-              onChangeText={onChange}
-              value={value}
+              onChangeText={field.onChange}
+              value={field.value}
             />
           )}
           name="password"
@@ -109,15 +119,10 @@ export default function Login() {
           title={!isloading ? "Entrar" : "Entrando..."}
           onPress={handleSubmit(onSubmit)}
         />
-        <LineFooter />
       </View>
-      <AuthSignin
-        handlerScreen={() => push("/signIn")}
-        label="Não tem uma conta?"
-        labelScreen="Registrar-se"
-      />
+
       <AuthFooter />
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
     </SafeAreaView>
   );
 }

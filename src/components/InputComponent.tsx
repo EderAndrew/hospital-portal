@@ -1,4 +1,10 @@
-import { View, Text, TextInput, Platform } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Platform,
+  KeyboardAvoidingView,
+} from "react-native";
 import { Icon } from "./IconComponent";
 import { Noop } from "react-hook-form";
 
@@ -24,7 +30,7 @@ export const InputComponent = ({
   onBlur,
 }: Props) => {
   return (
-    <View className="w-full flex gap-2">
+    <KeyboardAvoidingView className="w-full flex gap-2">
       <Text className="text-lg">{label}</Text>
       <View
         className={`border border-gray-300 rounded-lg w-full mb-4 flex flex-row items-center gap-2
@@ -32,7 +38,8 @@ export const InputComponent = ({
       >
         <TextInput
           placeholder={placeholder}
-          className="flex-1"
+          placeholderTextColor={"#000"}
+          className="flex-1 text-black"
           onBlur={onBlur}
           keyboardType={type === "email-address" ? "email-address" : "default"}
           secureTextEntry={type === "password"}
@@ -41,6 +48,6 @@ export const InputComponent = ({
         />
         {isIcon && icon && <Icon name={icon} size={20} color="#9ca3af" />}
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
