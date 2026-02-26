@@ -18,6 +18,7 @@ import { useState } from "react";
 export default function Login() {
   const { push, replace } = useDefaultRoute();
   const [isloading, setLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
 
   const {
     control,
@@ -44,83 +45,85 @@ export default function Login() {
 
   return (
     <SafeAreaView className="bg-white flex-1 flex items-center justify-between">
-      <Text
-        className={`text-xl font-semibold mb-6 ${Platform.OS === "ios" ? "" : ""}`}
-      >
-        Hospital portal
-      </Text>
-      <View className="flex items-center gap-2">
-        <View className="w-28 h-28 bg-blue-200 rounded-xl flex justify-center items-center mb-6">
-          <Hospital color="#3b82f6" size={64} className="bg-blue-300" />
-        </View>
-        <Text className="text-3xl font-bold">👋 Bem vindo(a)!</Text>
-        <Text className="text-lg text-blue-500">
-          Faça Login para agendar seus exames médicos
+      <View className="flex items-center justify-center gap-4 mt-8 w-full">
+        <Text
+          className={`text-xl font-semibold mb-6 ${Platform.OS === "ios" ? "" : ""}`}
+        >
+          Hospital portal
         </Text>
-      </View>
-      <View className="flex items-center w-full mt-4 px-8">
-        <Controller
-          control={control}
-          rules={{
-            required: true,
-          }}
-          render={({
-            field,
-          }: {
-            field: ControllerRenderProps<LoginSchema, "email">;
-          }) => (
-            <InputComponent
-              type="email-address"
-              label="Email"
-              onBlur={field.onBlur}
-              placeholder="Digite o seu Email"
-              onChangeText={field.onChange}
-              value={field.value}
-            />
-          )}
-          name="email"
-        />
-        {errors.email && (
-          <Text className="text-red-500">Campo Email é obrigatório.</Text>
-        )}
-
-        <Controller
-          control={control}
-          rules={{ required: true }}
-          render={({
-            field,
-          }: {
-            field: ControllerRenderProps<LoginSchema, "password">;
-          }) => (
-            <InputComponent
-              type="password"
-              label="Senha"
-              icon="EyeOff"
-              isIcon={true}
-              onBlur={field.onBlur}
-              placeholder="Digite sua Senha"
-              onChangeText={field.onChange}
-              value={field.value}
-            />
-          )}
-          name="password"
-        />
-        {errors.password && (
-          <Text className="text-red-500">Campo Senha é obrigatório.</Text>
-        )}
-        <View className="w-full flex items-end">
-          <TouchableOpacity onPress={() => push("/forgetPassword")}>
-            <Text className="text-blue-500">Esqueci a senha?</Text>
-          </TouchableOpacity>
+        <View className="flex items-center gap-2">
+          <View className="w-28 h-28 bg-blue-200 rounded-xl flex justify-center items-center mb-6">
+            <Hospital color="#3b82f6" size={64} className="bg-blue-300" />
+          </View>
+          <Text className="text-3xl font-bold">👋 Bem vindo(a)!</Text>
+          <Text className="text-lg text-blue-500">
+            Faça Login para agendar seus exames médicos
+          </Text>
         </View>
-        <ButtonComponent
-          isIcon={true}
-          icon="LogIn"
-          title={!isloading ? "Entrar" : "Entrando..."}
-          onPress={handleSubmit(onSubmit)}
-        />
-      </View>
+        <View className="flex items-center w-full mt-4 px-8">
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({
+              field,
+            }: {
+              field: ControllerRenderProps<LoginSchema, "email">;
+            }) => (
+              <InputComponent
+                type="email-address"
+                label="Email"
+                onBlur={field.onBlur}
+                placeholder="Digite o seu Email"
+                onChangeText={field.onChange}
+                value={field.value}
+              />
+            )}
+            name="email"
+          />
+          {errors.email && (
+            <Text className="text-red-500">Campo Email é obrigatório.</Text>
+          )}
 
+          <Controller
+            control={control}
+            rules={{ required: true }}
+            render={({
+              field,
+            }: {
+              field: ControllerRenderProps<LoginSchema, "password">;
+            }) => (
+              <InputComponent
+                type={isVisible ? "default" : "password"}
+                label="Senha"
+                icon={isVisible ? "Eye" : "EyeOff"}
+                isIcon={true}
+                onBlur={field.onBlur}
+                placeholder="Digite sua Senha"
+                onChangeText={field.onChange}
+                value={field.value}
+                onIconPress={()=>setIsVisible(!isVisible)}
+              />
+            )}
+            name="password"
+          />
+          {errors.password && (
+            <Text className="text-red-500">Campo Senha é obrigatório.</Text>
+          )}
+          <View className="w-full flex items-end">
+            <TouchableOpacity onPress={() => push("/forgetPassword")}>
+              <Text className="text-blue-500">Esqueci a senha?</Text>
+            </TouchableOpacity>
+          </View>
+          <ButtonComponent
+            isIcon={true}
+            icon="LogIn"
+            title={!isloading ? "Entrar" : "Entrando..."}
+            onPress={handleSubmit(onSubmit)}
+          />
+        </View>
+      </View>
       <AuthFooter />
       <StatusBar style="dark" />
     </SafeAreaView>

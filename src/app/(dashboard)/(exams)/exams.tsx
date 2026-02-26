@@ -68,7 +68,7 @@ export default function Exams() {
         />
       </View>
 
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
     </SafeAreaView>
   );
 }

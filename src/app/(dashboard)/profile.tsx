@@ -6,7 +6,7 @@ export default function Profile() {
   return (
     <SafeAreaView>
       <Text>profile Screen</Text>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
     </SafeAreaView>
   );
 }

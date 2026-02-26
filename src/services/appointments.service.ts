@@ -2,7 +2,7 @@ import { api } from "./api.service";
 
 export const myActiveSchedules = async (id: string) => {
   try {
-    const { data } = await api.get(`/schedules/allUserSchedules/${id}`);
+    const { data } = await api.get(`/appointments/myAppointments/${id}`);
     return data;
   } catch (error: any) {
     console.log(error.response?.data);

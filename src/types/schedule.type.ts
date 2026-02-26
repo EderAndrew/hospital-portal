@@ -1,13 +1,18 @@
 import { Exam } from "./exam.type";
+import { User } from "./user.type";
 
-export type Schedule = {
+export type Appointments = {
   id: string;
-  user: {
+  patient: {
     id: string;
-    name: string;
-  };
+    user: User;
+    cpf: string;
+    phone: string;
+    birth_date: string;
+    gender: string;
+    emergency_contact: string;
+  }
   exam: Exam;
-  patient: string;
   date: string;
   time: string;
   info: string;

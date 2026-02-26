@@ -4,6 +4,7 @@ import {
   TextInput,
   Platform,
   KeyboardAvoidingView,
+  TouchableOpacity,
 } from "react-native";
 import { Icon } from "./IconComponent";
 import { Noop } from "react-hook-form";
@@ -17,6 +18,7 @@ type Props = {
   value: string;
   onChangeText: (text: string) => void;
   onBlur: Noop;
+  onIconPress?: () => void;
 };
 
 export const InputComponent = ({
@@ -28,6 +30,7 @@ export const InputComponent = ({
   value,
   onChangeText,
   onBlur,
+  onIconPress
 }: Props) => {
   return (
     <KeyboardAvoidingView className="w-full flex gap-2">
@@ -38,7 +41,7 @@ export const InputComponent = ({
       >
         <TextInput
           placeholder={placeholder}
-          placeholderTextColor={"#000"}
+          placeholderTextColor={"#9ca3af"}
           className="flex-1 text-black"
           onBlur={onBlur}
           keyboardType={type === "email-address" ? "email-address" : "default"}
@@ -46,7 +49,11 @@ export const InputComponent = ({
           value={value}
           onChangeText={onChangeText}
         />
-        {isIcon && icon && <Icon name={icon} size={20} color="#9ca3af" />}
+        {isIcon && icon && (
+          <TouchableOpacity onPress={onIconPress}>
+             <Icon name={icon} size={20} color="#9ca3af" />
+          </TouchableOpacity>
+        )}
       </View>
     </KeyboardAvoidingView>
   );
