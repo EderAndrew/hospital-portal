@@ -1,4 +1,4 @@
-import { Plan } from "./plan.type";
+import { Patient } from "./patient.type";
 
 export type User = {
   id: string;
@@ -8,4 +8,7 @@ export type User = {
   photo_url: string;
   role: string;
   status: boolean;
+  patient: Patient
+  createdAt: string;
+  updatedAt: string;
 };

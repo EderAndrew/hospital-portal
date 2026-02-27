@@ -10,7 +10,7 @@ export const signIn = async (payload: LoginSchema) => {
         "x-platform": "mobile",
       },
     });
-
+    console.log(data)
     TokenService.setAccessToken(data.accessToken);
     await TokenService.setRefreshToken(data.refreshToken);
 
