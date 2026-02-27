@@ -2,11 +2,11 @@ import axios from "axios";
 import { TokenService } from "./token.service";
 
 export const api = axios.create({
-  baseURL: process.env.EXPO_PUBLIC_KGROK_URL,
+  baseURL: process.env.EXPO_PUBLIC_API_URL,
 });
 
 export const refreshApi = axios.create({
-  baseURL: process.env.EXPO_PUBLIC_KGROK_URL,
+  baseURL: process.env.EXPO_PUBLIC_API_URL,
 });
 
 api.interceptors.request.use(async (config) => {
