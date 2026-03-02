@@ -1,4 +1,3 @@
-import { SafeAreaView } from "react-native-safe-area-context";
 import {
   FlatList,
   ScrollView,
@@ -35,7 +34,7 @@ export default function Exams() {
   }, []);
 
   return (
-    <SafeAreaView className="bg-gray-100 flex-1">
+    <View className="bg-gray-100 flex-1">
       <Header label="Exames disponíveis" isBack={false} />
       <View className="flex-1 flex items-center px-6">
         <SearchExamComponent />
@@ -68,7 +67,7 @@ export default function Exams() {
         />
       </View>
 
-      <StatusBar style="dark" />
-    </SafeAreaView>
+      <StatusBar style="auto" />
+    </View>
   );
 }

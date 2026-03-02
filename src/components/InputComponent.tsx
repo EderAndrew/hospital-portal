@@ -41,6 +41,7 @@ export const InputComponent = ({
       >
         <TextInput
           placeholder={placeholder}
+          autoCapitalize="none"
           placeholderTextColor={"#9ca3af"}
           className="flex-1 text-black"
           onBlur={onBlur}

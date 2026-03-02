@@ -35,7 +35,7 @@ export default function Login() {
     try {
       setLoading(true);
       await signIn(data);
-      replace("(dashboard)");
+      replace("(dashboard)/home");
     } catch (error) {
       if (error instanceof Error) {
         Alert.alert("Login", error.message);
@@ -49,7 +49,7 @@ export default function Login() {
   };
 
   return (
-    <SafeAreaView className="bg-white flex-1 flex items-center justify-between">
+    <View className="bg-white flex-1 flex items-center justify-between">
       <View className="flex items-center justify-center gap-4 mt-8 w-full">
         <Text
           className={`text-xl font-semibold mb-6 ${Platform.OS === "ios" ? "" : ""}`}
@@ -130,7 +130,7 @@ export default function Login() {
         </View>
       </View>
       <AuthFooter />
-      <StatusBar style="dark" />
-    </SafeAreaView>
+      <StatusBar style="auto" />
+    </View>
   );
 }

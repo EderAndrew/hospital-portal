@@ -5,7 +5,7 @@ import { Appointments } from "@/types/schedule.type";
 import { useEffect, useState } from "react";
 import { myActiveSchedules } from "@/services/appointments.service";
 import { useAuthStore } from "@/stores/useAuth.store";
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 
 export default function Schedules() {
   const [schedules, setSchedules] = useState<Appointments[]>([]);
@@ -19,14 +19,14 @@ export default function Schedules() {
   }, [schedules]);
 
   return (
-    <SafeAreaView>
+    <View>
       <FlatList
         data={schedules}
         keyExtractor={(item) => item.id as string}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => <CardScheduleComponent schedule={item} />}
       />
-      <StatusBar style="dark" />
-    </SafeAreaView>
+      <StatusBar style="auto" />
+    </View>
   );
 }

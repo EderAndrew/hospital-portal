@@ -1,7 +1,6 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Schedules from "./schedules";
 import Hystoric from "./hystoric";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Header } from "@/components/Header";
 import { View } from "react-native";
 
@@ -9,7 +8,7 @@ const Tab = createMaterialTopTabNavigator();
 
 export default function SchedulesLayout() {
   return (
-    <SafeAreaView className="flex-1">
+    <View className="flex-1">
       <Header label="Meus agendamentos" isBack={false} />
       <View className="flex-1 w-full px-6 flex">
         <Tab.Navigator
@@ -23,6 +22,6 @@ export default function SchedulesLayout() {
           <Tab.Screen name="Historico" component={Hystoric} />
         </Tab.Navigator>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }

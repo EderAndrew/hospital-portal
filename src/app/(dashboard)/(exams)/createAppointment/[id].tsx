@@ -7,8 +7,7 @@ import { Exam } from "@/types/exam.type";
 import { AvailableTimes } from "@/utils/availableTimes";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { ScrollView, Text, TextInput, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 export default function CreateAppointment() {
@@ -30,7 +29,7 @@ export default function CreateAppointment() {
   }, [id]);
 
   return (
-    <SafeAreaView className="bg-gray-100 flex-1">
+    <View className="bg-gray-100 flex-1">
       <Header label="Novo Agendamento" />
       <ScrollView className="flex-1 w-full px-4">
         {exam && <AppointmentCard key={exam.id} exam={exam} />}
@@ -64,7 +63,7 @@ export default function CreateAppointment() {
           </Text>
         </TouchableOpacity>
       </ScrollView>
-      <StatusBar style="dark" />
-    </SafeAreaView>
+      <StatusBar style="auto" />
+    </View>
   );
 }

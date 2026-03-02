@@ -13,7 +13,7 @@ export default function ForgetPassword() {
   const { back } = useDefaultRoute();
 
   return (
-    <SafeAreaView className="flex-1 px-4 bg-white items-center justify-between">
+    <View className="flex-1 px-4 bg-white items-center justify-between">
       <Header label="Segurança" />
       <View className="flex-1 items-center justify-center px-4">
         <View className="w-20 h-20 bg-blue-200 rounded-full flex justify-center items-center mb-6">
@@ -48,6 +48,6 @@ export default function ForgetPassword() {
         </View>
         <AuthFooter />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
