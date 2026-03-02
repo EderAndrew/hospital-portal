@@ -6,8 +6,9 @@ export default function DashboardLayout() {
   const { user, isLoading } = useAuthStore();
 
   if (isLoading) return null;
-
+  
   if (!user) {
+    console.log("User2: ", user);
     return <Redirect href="/(auth)/login" />;
   }
   return (

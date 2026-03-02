@@ -5,7 +5,7 @@ export default function AuthLayout() {
     const { user } = useAuthStore()
 
     if(user){
-        return <Redirect href="/(dashboard)" />
+        return <Redirect href="/home" />
     }
     return(
         <Stack screenOptions={{headerShown: false}}>

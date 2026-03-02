@@ -15,7 +15,6 @@ export const signIn = async (payload: LoginSchema) => {
     await TokenService.setRefreshToken(data.refreshToken);
 
     const me = await api.get("/users/me");
-
     useAuthStore.getState().setUser(me.data);
 
     return me.data;

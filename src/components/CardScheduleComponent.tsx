@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { Icon } from "./IconComponent";
-import { Schedule } from "@/types/schedule.type";
+import { Appointments } from "@/types/schedule.type";
 
 type Props = {
   schedule: Schedule;

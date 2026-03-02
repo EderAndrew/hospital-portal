@@ -35,7 +35,6 @@ export default function Login() {
     try {
       setLoading(true);
       await signIn(data);
-      replace("(dashboard)/home");
     } catch (error) {
       if (error instanceof Error) {
         Alert.alert("Login", error.message);

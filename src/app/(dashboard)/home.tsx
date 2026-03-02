@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <View className="bg-white flex-1 flex items-center justify-between">
       <Text>Home Screen</Text>
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
     </View>
   );
 }

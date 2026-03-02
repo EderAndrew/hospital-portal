@@ -5,7 +5,7 @@ import { api } from "./api.service";
 
 export const bootstrapAuth = async () => {
   const store = useAuthStore.getState();
-
+  console.log("Bootstrap auth...", store.user);
   try {
     await TokenService.initialize();
 

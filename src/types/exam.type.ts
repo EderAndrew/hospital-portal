@@ -12,5 +12,6 @@ export type Exam = {
   duration: string;
   specialty: {
     id: string;
+    name: string;
   };
 };
