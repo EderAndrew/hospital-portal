@@ -10,7 +10,7 @@ export const signIn = async (payload: LoginSchema) => {
         "x-platform": "mobile",
       },
     });
-    console.log(data)
+    
     TokenService.setAccessToken(data.accessToken);
     await TokenService.setRefreshToken(data.refreshToken);
 
@@ -25,3 +25,33 @@ export const signIn = async (payload: LoginSchema) => {
     throw new Error(error.response?.data?.message || "Erro ao autenticar");
   }
 };
+
+export const refreshSession = async () => {
+  const store = useAuthStore.getState()
+  try {
+    const refreshToken = await TokenService.getRefreshToken();
+
+    if (!refreshToken) {
+      store.setLoading(false)
+      return;
+    };
+
+    const { data } = await api.post("auth/refresh", {
+      refreshToken,
+    })
+
+    TokenService.setAccessToken(data.accessToken);
+    await TokenService.setRefreshToken(data.refreshToken);
+
+    const me = await api.get("/users/me");
+
+    store.setUser(me.data);
+
+    return me.data;
+  } catch (error) {
+    await TokenService.clear()
+    return null
+  } finally {
+    store.setLoading(false)
+  }
+}

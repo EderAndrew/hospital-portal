@@ -6,6 +6,10 @@ export const TokenService = {
     accessToken = token;
   },
 
+  initialize: async () => {
+    accessToken = null;
+  },
+
   getRefreshToken: async () => {
     return SecureStore.getItemAsync("refreshToken");
   },

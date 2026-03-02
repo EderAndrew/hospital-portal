@@ -1,5 +1,6 @@
 import axios from "axios";
 import { TokenService } from "./token.service";
+import { useAuthStore } from "@/stores/useAuth.store";
 
 export const api = axios.create({
   baseURL: process.env.EXPO_PUBLIC_API_URL,
@@ -76,6 +77,7 @@ api.interceptors.response.use(
         return api(originalRequest);
       } catch (error) {
         await TokenService.clear();
+        useAuthStore.getState().logout();
         return Promise.reject(error);
       } finally {
         isRefreshing = false;

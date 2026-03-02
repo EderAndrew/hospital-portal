@@ -35,9 +35,14 @@ export default function Login() {
     try {
       setLoading(true);
       await signIn(data);
-      replace("(dashboard)/home");
-    } catch (error: any) {
-      Alert.alert("Login", error.message);
+      replace("(dashboard)");
+    } catch (error) {
+      if (error instanceof Error) {
+        Alert.alert("Login", error.message);
+        return;
+      }
+      
+      Alert.alert("Login", "Ocorreu um erro inesperado. Tente novamente.");
     } finally {
       setLoading(false);
     }
