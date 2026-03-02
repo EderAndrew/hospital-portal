@@ -1,7 +1,15 @@
 import { icon, iconlabels } from "@/constants/icon";
-import { Tabs } from "expo-router";
+import { useAuthStore } from "@/stores/useAuth.store";
+import { Redirect, Tabs } from "expo-router";
 
 export default function DashboardLayout() {
+  const { user, isLoading } = useAuthStore();
+
+  if (isLoading) return null;
+
+  if (!user) {
+    return <Redirect href="/(auth)/login" />;
+  }
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen

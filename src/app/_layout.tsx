@@ -1,17 +1,19 @@
-import { RouteGuard } from "@/utils/routeGuard";
+import { bootstrapAuth } from "@/services/bootstrapAuth";
 import { Stack } from "expo-router";
+import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function RootLayout() {
+  useEffect(() => {
+    bootstrapAuth();
+  }, []);
+  
   return (
     <SafeAreaProvider>
-      <RouteGuard>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="index" />
+      <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(auth)" />
           <Stack.Screen name="(dashboard)" />
         </Stack>
-      </RouteGuard>
     </SafeAreaProvider>
   );
 }
