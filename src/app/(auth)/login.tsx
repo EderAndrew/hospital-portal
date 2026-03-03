@@ -48,7 +48,7 @@ export default function Login() {
   };
 
   return (
-    <View className="bg-white flex-1 flex items-center justify-between">
+    <SafeAreaView className="bg-white flex-1 flex items-center justify-between">
       <View className="flex items-center justify-center gap-4 mt-8 w-full">
         <Text
           className={`text-xl font-semibold mb-6 ${Platform.OS === "ios" ? "" : ""}`}
@@ -129,7 +129,7 @@ export default function Login() {
         </View>
       </View>
       <AuthFooter />
-      <StatusBar style="auto" />
-    </View>
+      <StatusBar style="auto" hidden />
+    </SafeAreaView>
   );
 }

@@ -1,11 +1,12 @@
 import { Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Home() {
   return (
-    <View className="bg-white flex-1 flex items-center justify-between">
+    <SafeAreaView className="bg-white flex-1 flex items-center justify-between">
       <Text>Home Screen</Text>
-      <StatusBar style="auto" />
-    </View>
+      <StatusBar style="auto" hidden />
+    </SafeAreaView>
   );
 }

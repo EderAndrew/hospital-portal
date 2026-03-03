@@ -12,6 +12,7 @@ export const refreshApi = axios.create({
 
 api.interceptors.request.use(async (config) => {
   const token = TokenService.getAccessToken();
+  console.log("Attaching token to request:", token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

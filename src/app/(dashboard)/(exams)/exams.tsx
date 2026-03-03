@@ -12,6 +12,7 @@ import { findExams } from "@/services/exams.service";
 import { Specialties } from "@/types/exam.type";
 import { CardExam } from "@/components/exams/CardExam";
 import { Header } from "@/components/Header";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Exams() {
   const [exams, setExams] = useState<Specialties[]>([]);
@@ -34,7 +35,7 @@ export default function Exams() {
   }, []);
 
   return (
-    <View className="bg-gray-100 flex-1">
+    <SafeAreaView className="bg-gray-100 flex-1">
       <Header label="Exames disponíveis" isBack={false} />
       <View className="flex-1 flex items-center px-6">
         <SearchExamComponent />
@@ -67,7 +68,7 @@ export default function Exams() {
         />
       </View>
 
-      <StatusBar style="auto" />
-    </View>
+      <StatusBar style="auto" hidden/>
+    </SafeAreaView>
   );
 }

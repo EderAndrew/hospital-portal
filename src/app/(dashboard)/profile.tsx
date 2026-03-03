@@ -4,9 +4,9 @@ import { StatusBar } from "expo-status-bar";
 
 export default function Profile() {
   return (
-    <View>
+    <SafeAreaView>
       <Text>profile Screen</Text>
-      <StatusBar style="dark" />
-    </View>
+      <StatusBar style="auto" hidden />
+    </SafeAreaView>
   );
 }
