@@ -18,3 +18,13 @@ export type Appointments = {
   info: string;
   status: string;
 };
+
+export type Schedule = {
+  patient_id: string;
+  exam_id: string;
+  doctor_id: string;
+  room_id: string;
+  start_time: string;
+  notes: string;
+  scheduled_by?:string;
+}

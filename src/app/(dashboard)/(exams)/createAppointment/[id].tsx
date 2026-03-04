@@ -29,6 +29,7 @@ export default function CreateAppointment() {
     })();
   }, [id]);
 
+  const handlerSchedulesAppointment = () => {}
   return (
     <SafeAreaView className="bg-gray-100 flex-1">
       <Header label="Novo Agendamento" />
@@ -58,7 +59,9 @@ export default function CreateAppointment() {
           placeholder="Algum requerimento especial ou observação..."
           className="border h-28 rounded-lg border-slate-400 p-2 mb-6"
         />
-        <TouchableOpacity className="bg-blue-400 border border-blue-500 rounded-lg p-4 justify-center items-center">
+        <TouchableOpacity className="bg-blue-400 border border-blue-500 rounded-lg p-4 justify-center items-center"
+          onPress={handlerSchedulesAppointment}
+        >
           <Text className="font-semibold text-white">
             Confirmar Agendamento
           </Text>
