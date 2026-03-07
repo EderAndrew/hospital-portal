@@ -5,7 +5,7 @@ import { Appointments } from "@/types/schedule.type";
 import { useEffect, useState } from "react";
 import { myActiveSchedules } from "@/services/appointments.service";
 import { useAuthStore } from "@/stores/useAuth.store";
-import { FlatList, View } from "react-native";
+import { FlatList, View, Text } from "react-native";
 
 export default function Schedules() {
   const [schedules, setSchedules] = useState<Appointments[]>([]);
@@ -13,13 +13,21 @@ export default function Schedules() {
 
   useEffect(() => {
     (async () => {
-      const resp = await myActiveSchedules(user?.id as string);
+      const resp = await myActiveSchedules(user?.patient.id as string);
       setSchedules(resp);
     })();
   }, [schedules]);
 
+  if (schedules.length === 0) {
+    return (
+      <View>
+        <Text>Nenhum exame agendado.</Text>
+      </View>
+    );
+  }
+
   return (
-    <View>
+    <SafeAreaView>
       <FlatList
         data={schedules}
         keyExtractor={(item) => item.id as string}
@@ -27,6 +35,6 @@ export default function Schedules() {
         renderItem={({ item }) => <CardScheduleComponent schedule={item} />}
       />
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }

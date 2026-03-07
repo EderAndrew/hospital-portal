@@ -3,19 +3,21 @@ import { Icon } from "./IconComponent";
 import { Appointments } from "@/types/schedule.type";
 
 type Props = {
-  schedule: Schedule;
+  schedule: Appointments;
 };
 
 export const CardScheduleComponent = ({ schedule }: Props) => {
-  const dateCorrect = new Date(schedule.date).toLocaleString().split(",")[0];
+  const dateCorrect = new Date(schedule.start_time)
+    .toLocaleString()
+    .split(",")[0];
   return (
     <View className="w-full bg-white p-2 rounded-lg mb-4">
       <Text className="font-semibold text-blue-500">
         {schedule.exam.name.toUpperCase()}
       </Text>
-      <Text className="font-semibold">{schedule.exam.specialty}</Text>
+      <Text className="font-semibold">{schedule.exam.name}</Text>
       <Text className="text-sm text-slate-400">
-        {dateCorrect} * {schedule.time}
+        {dateCorrect} * {schedule.start_time.split("T")[1]}
       </Text>
       <View className="flex flex-row items-center gap-2">
         <Icon name="File" size={14} color={"#94a3b8"} />

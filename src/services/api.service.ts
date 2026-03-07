@@ -3,11 +3,11 @@ import { TokenService } from "./token.service";
 import { useAuthStore } from "@/stores/useAuth.store";
 
 export const api = axios.create({
-  baseURL: process.env.EXPO_PUBLIC_API_URL,
+  baseURL: process.env.EXPO_PUBLIC_KGROK_URL,
 });
 
 export const refreshApi = axios.create({
-  baseURL: process.env.EXPO_PUBLIC_API_URL,
+  baseURL: process.env.EXPO_PUBLIC_KGROK_URL,
 });
 
 api.interceptors.request.use(async (config) => {

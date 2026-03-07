@@ -1,4 +1,6 @@
+import { Doctor } from "./doctor.type";
 import { Exam } from "./exam.type";
+import { Room } from "./room.type";
 import { User } from "./user.type";
 
 export type Appointments = {
@@ -11,12 +13,14 @@ export type Appointments = {
     birth_date: string;
     gender: string;
     emergency_contact: string;
-  }
+  };
   exam: Exam;
-  date: string;
-  time: string;
-  info: string;
+  doctor: Doctor;
+  room: Room;
+  start_time: string;
+  end_time: string;
   status: string;
+  notes?: string;
 };
 
 export type Schedule = {
@@ -26,5 +30,5 @@ export type Schedule = {
   room_id: string;
   start_time: string;
   notes: string;
-  scheduled_by?:string;
-}
+  scheduled_by?: string;
+};
