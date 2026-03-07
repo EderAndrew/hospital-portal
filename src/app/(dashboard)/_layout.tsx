@@ -8,7 +8,6 @@ export default function DashboardLayout() {
   if (isLoading) return null;
   
   if (!user) {
-    console.log("User2: ", user);
     return <Redirect href="/(auth)/login" />;
   }
   return (
