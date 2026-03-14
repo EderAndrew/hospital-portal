@@ -1,7 +1,6 @@
 import { routes } from "@/services/routes"
-import { Appointment, CreateAppointmentResponse } from "./appointments.type"
+import { Appointment, CreateAppointmentResponse, Schedule } from "./appointments.type"
 import { getRequest } from "@/services/getRequest"
-import { Schedule } from "@/types/schedule.type"
 import { postRequest } from "@/services/postRequest"
 
 export const myActiveSchedules = (id: string) => {
@@ -9,5 +8,5 @@ export const myActiveSchedules = (id: string) => {
 }
 
 export const createAppointments = async (schedule: Schedule) => {
-  return postRequest<CreateAppointmentResponse, Schedule>("/appointments/create", schedule)
+  return postRequest<CreateAppointmentResponse, Schedule>(routes.createAppointment, schedule)
 };

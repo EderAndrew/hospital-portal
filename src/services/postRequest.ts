@@ -3,7 +3,7 @@ import { api } from "./api.service"
 
 export async function postRequest<T, B>(
     url: string,
-    body: B
+    body: B,
 ): Promise<T> {
     try{
         const { data } = await api.post<T>(url, body, {
