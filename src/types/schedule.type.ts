@@ -1,27 +1,23 @@
 import { Doctor } from "./doctor.type";
 import { Exam } from "./exam.type";
+import { Patient } from "./patient.type";
 import { Room } from "./room.type";
 import { User } from "./user.type";
 
-export type Appointments = {
+export type Appointment = {
   id: string;
-  patient: {
-    id: string;
-    user: User;
-    cpf: string;
-    phone: string;
-    birth_date: string;
-    gender: string;
-    emergency_contact: string;
-  };
+  patient: Patient;
   exam: Exam;
   doctor: Doctor;
   room: Room;
-  start_time: string;
-  end_time: string;
-  status: string;
+  start_time: ISODate;
+  end_time: ISODate;
+  status: AppointmentStatus;
   notes?: string;
 };
+
+export type AppointmentStatus = "scheduled" | "confirmed" | "completed" | "canceled";
+type ISODate = string
 
 export type Schedule = {
   patient_id: string;
