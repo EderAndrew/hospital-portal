@@ -12,7 +12,7 @@ import {
   Controller,
   type ControllerRenderProps,
 } from "react-hook-form";
-import { signIn } from "@/services/auth.service";
+import { signIn } from "@/features/auth/auth.service";
 import { useState } from "react";
 
 export default function Login() {

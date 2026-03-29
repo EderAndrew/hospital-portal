@@ -8,11 +8,11 @@ import {
 import { SearchExamComponent } from "@/components/exams/SearchExamComponent";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useMemo, useState } from "react";
-import { findExams } from "@/services/exams.service";
-import { Specialties } from "@/types/exam.type";
 import { CardExam } from "@/components/exams/CardExam";
 import { Header } from "@/components/Header";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { findExams } from "@/features/exams/exams.service";
+import { Specialties } from "@/features/exams/exams.type";
 
 export default function Exams() {
   const [exams, setExams] = useState<Specialties[]>([]);
@@ -29,7 +29,7 @@ export default function Exams() {
   useEffect(() => {
     (async () => {
       const resp = await findExams();
-      setIsSelected(resp[0].id);
+      setIsSelected(resp[0]?.id);
       setExams(resp);
     })();
   }, []);

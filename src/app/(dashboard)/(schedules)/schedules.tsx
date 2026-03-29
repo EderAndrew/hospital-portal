@@ -1,14 +1,14 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
+import { myActiveSchedules } from "@/features/appointments/appointments.service";
 import { CardScheduleComponent } from "@/components/CardScheduleComponent";
-import { Appointments } from "@/types/schedule.type";
+import { Appointment } from "@/features/appointments/appointments.type";
 import { useEffect, useState } from "react";
-import { myActiveSchedules } from "@/services/appointments.service";
+import { StatusBar } from "expo-status-bar";
 import { useAuthStore } from "@/stores/useAuth.store";
 import { FlatList, View, Text } from "react-native";
 
 export default function Schedules() {
-  const [schedules, setSchedules] = useState<Appointments[]>([]);
+  const [schedules, setSchedules] = useState<Appointment[]>([]);
   const { user } = useAuthStore((state) => state);
 
   useEffect(() => {
